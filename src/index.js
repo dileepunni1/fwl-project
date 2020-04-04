@@ -1,5 +1,5 @@
 import FakeData from './fake-data';
-import Items from './view/items';
+import Items from './view/components/items';
 
 const state = {
   items: FakeData.getItems(),
