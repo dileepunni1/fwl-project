@@ -20,7 +20,7 @@ const render = newState => {
     const cloneApp = Registry.renderRoot(app, newState);
     app = VDom.mount(cloneApp, app);
 
-    console.log(VDom.Mapper.mapRootNode(app));
+    console.log(VDom.render(VDom.Mapper.mapRootNode(app)));
   });
 };
 
