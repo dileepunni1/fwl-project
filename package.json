@@ -1,0 +1,13 @@
+{
+  "name": "fwl-project",
+  "version": "1.0.0",
+  "description": "A simple (but educative) JS Framework (without a Framework)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["javascript", "webpack", "frameworkless", "vdom", "frontend"],
+  "author": "Francesco Sciuti",
+  "license": "ISC"
+}
