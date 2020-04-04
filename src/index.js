@@ -1,1 +1,27 @@
-console.log('Hello FWL-Project');
+const items = ['Francesco', 'Aurelio', 'Cristina'];
+
+const app = document.querySelector('#app');
+const ul = document.createElement('ul');
+ul.className = 'list-group';
+
+const addItem = (item) => {
+  const li = document.createElement('li');
+  li.textContent = item;
+  li.className = 'list-group-item';
+  return li;
+};
+
+items.forEach((item) => {
+  ul.appendChild(addItem(item));
+});
+
+app.appendChild(ul);
+
+const button = document.createElement('button');
+button.textContent = 'Aggiungi un elemento';
+button.className = 'btn btn-primary';
+button.addEventListener('click', () => {
+  ul.appendChild(addItem('Ragù'));
+});
+app.appendChild(document.createElement('hr'));
+app.appendChild(button);
