@@ -21,9 +21,8 @@ app.appendChild(input);
 
 app.appendChild(document.createElement('hr'));
 
-let ul = document.createElement('ul');
+const ul = document.createElement('ul');
 ul.className = 'list-group';
-ul = Items.createItemList(ul, state.items);
 app.appendChild(ul);
 
 const button = document.createElement('button');
@@ -37,3 +36,8 @@ button.addEventListener('click', () => {
 });
 app.appendChild(document.createElement('hr'));
 app.appendChild(button);
+
+window.requestAnimationFrame(() => {
+  const cloneTarget = Items.createItemList(ul, state.items);
+  ul.replaceWith(cloneTarget);
+});
