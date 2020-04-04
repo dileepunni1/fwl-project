@@ -8,9 +8,11 @@ const state = {
 let app = document.querySelector('#app');
 
 const render = newState => {
-  const cloneApp = Render(app, newState);
-  app.replaceWith(cloneApp);
-  app = cloneApp;
+  window.requestAnimationFrame(() => {
+    const cloneApp = Render(app, newState);
+    app.replaceWith(cloneApp);
+    app = cloneApp;
+  });
 };
 
 document.querySelector('[data-component=item-filter]').addEventListener('input', (evt) => {
@@ -25,6 +27,4 @@ document.querySelector('[data-component=item-add]').addEventListener('click', ()
   render({ ...state });
 });
 
-window.requestAnimationFrame(() => {
-  render({ ...state });
-});
+render({ ...state });
