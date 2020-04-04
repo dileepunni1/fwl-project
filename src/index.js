@@ -1,7 +1,6 @@
-import faker from 'faker';
+import FakeData from './fake-data';
 
-const n = faker.random.number({ min: 2, max: 5 });
-const items = Array.from({ length: n }, () => faker.name.findName());
+const items = FakeData.getItems();
 
 const addItem = (item) => {
   const li = document.createElement('li');
@@ -41,7 +40,7 @@ const button = document.createElement('button');
 button.textContent = 'Aggiungi un elemento';
 button.className = 'btn btn-primary';
 button.addEventListener('click', () => {
-  const newItem = faker.name.findName();
+  const newItem = FakeData.getItem();
   items.push(newItem);
   app.querySelector('.list-group').appendChild(addItem(newItem));
   input.dispatchEvent(new Event('input'));
