@@ -5,6 +5,7 @@ import Counter from './view/components/counter';
 import Registry from './view/registry';
 
 import mount from './vdom/mount';
+import Mapper from './vdom/mapper';
 
 const state = {
   items: FakeData.getItems(),
@@ -19,6 +20,8 @@ const render = newState => {
   window.requestAnimationFrame(() => {
     const cloneApp = Registry.renderRoot(app, newState);
     app = mount(cloneApp, app);
+
+    console.log(Mapper.mapRootNode(app));
   });
 };
 
