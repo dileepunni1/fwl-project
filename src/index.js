@@ -1,43 +1,51 @@
 import FakeData from './fake-data';
-import Items from './view/components/items';
+import Render from './view/render';
 
 const state = {
   items: FakeData.getItems(),
 };
 
-const app = document.querySelector('#app');
+let app = document.querySelector('#app');
+
+const render = newState => {
+  const cloneApp = Render(app, newState);
+  app.replaceWith(cloneApp);
+  app = cloneApp;
+};
 
 const input = document.createElement('input');
 input.className = 'form-control';
 input.addEventListener('input', (evt) => {
-  let ulCloned = app.querySelector('.list-group').cloneNode(false);
   const filteredItems = state.items.filter((item) => {
     return item.toLowerCase().indexOf(evt.target.value.toLowerCase()) >= 0;
   });
-  ulCloned = Items.createItemList(ulCloned, filteredItems);
-  app.querySelector('.list-group').replaceWith(ulCloned);
+  render({ ...state, items: filteredItems });
 });
 
 const ul = document.createElement('ul');
 ul.className = 'list-group';
+ul.setAttribute('data-component', 'item-list');
+
+const p = document.createElement('p');
+p.className = 'alert alert-primary';
+p.setAttribute('data-component', 'item-counter');
 
 const button = document.createElement('button');
 button.textContent = 'Aggiungi un elemento';
 button.className = 'btn btn-primary';
 button.addEventListener('click', () => {
-  const newItem = FakeData.getItem();
-  state.items.push(newItem);
-  app.querySelector('.list-group').appendChild(Items.createItem(newItem));
-  input.dispatchEvent(new Event('input'));
+  state.items.push(FakeData.getItem());
+  render({ ...state });
 });
 
-app.appendChild(input);
+app.before(input);
+app.appendChild(document.createElement('hr'));
+app.appendChild(p);
 app.appendChild(document.createElement('hr'));
 app.appendChild(ul);
 app.appendChild(document.createElement('hr'));
-app.appendChild(button);
+app.after(button);
 
 window.requestAnimationFrame(() => {
-  const cloneTarget = Items.createItemList(ul, state.items);
-  ul.replaceWith(cloneTarget);
+  render({ ...state });
 });
