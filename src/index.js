@@ -17,13 +17,9 @@ input.addEventListener('input', (evt) => {
   ulCloned = Items.createItemList(ulCloned, filteredItems);
   app.querySelector('.list-group').replaceWith(ulCloned);
 });
-app.appendChild(input);
-
-app.appendChild(document.createElement('hr'));
 
 const ul = document.createElement('ul');
 ul.className = 'list-group';
-app.appendChild(ul);
 
 const button = document.createElement('button');
 button.textContent = 'Aggiungi un elemento';
@@ -34,6 +30,10 @@ button.addEventListener('click', () => {
   app.querySelector('.list-group').appendChild(Items.createItem(newItem));
   input.dispatchEvent(new Event('input'));
 });
+
+app.appendChild(input);
+app.appendChild(document.createElement('hr'));
+app.appendChild(ul);
 app.appendChild(document.createElement('hr'));
 app.appendChild(button);
 
