@@ -4,6 +4,8 @@ import Items from './view/components/items';
 import Counter from './view/components/counter';
 import Registry from './view/registry';
 
+import mount from './vdom/mount';
+
 const state = {
   items: FakeData.getItems(),
 };
@@ -16,8 +18,7 @@ Registry.add('item-counter', Counter);
 const render = newState => {
   window.requestAnimationFrame(() => {
     const cloneApp = Registry.renderRoot(app, newState);
-    app.replaceWith(cloneApp);
-    app = cloneApp;
+    app = mount(cloneApp, app);
   });
 };
 
