@@ -21,5 +21,6 @@
       "arrow-parens": "off",
       "object-curly-newline": "off",
       "func-names": "off"
-    }
+    },
+    "parser": "babel-eslint"
 }
