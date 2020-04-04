@@ -1,5 +1,8 @@
 import FakeData from './fake-data';
-import Render from './view/render';
+
+import Items from './view/components/items';
+import Counter from './view/components/counter';
+import Registry from './view/registry';
 
 const state = {
   items: FakeData.getItems(),
@@ -7,9 +10,12 @@ const state = {
 
 let app = document.querySelector('#app');
 
+Registry.add('item-list', Items.createItemList);
+Registry.add('item-counter', Counter);
+
 const render = newState => {
   window.requestAnimationFrame(() => {
-    const cloneApp = Render(app, newState);
+    const cloneApp = Registry.renderRoot(app, newState);
     app.replaceWith(cloneApp);
     app = cloneApp;
   });
