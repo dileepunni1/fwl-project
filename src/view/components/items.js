@@ -1,4 +1,4 @@
-import * as VDOM from '../../vdom/vdom';
+import component from './component';
 
 const createItem = (item) => {
   const li = document.createElement('li');
@@ -17,19 +17,16 @@ const createItemList = ($target, { items = [] }) => {
   return $cloneTarget;
 };
 
+const getHTML = (items) => items.reduce((str, item) => {
+  return `
+    ${str}
+    <li class="list-group-item">
+      ${item}
+    </li>`;
+}, '');
+
 const getVNode = (vTarget, { items = [] }) => {
-  const children = (items.map((item) => VDOM.VElement.create({
-    tagName: 'li',
-    attrs: { class: 'list-group-item' },
-    isSVG: false,
-    children: [item],
-  })));
-
-  return VDOM.VElement.create({
-    ...vTarget,
-    children,
-  });
+  return component(vTarget, getHTML(items));
 };
-
 
 export default { createItem, createItemList, getVNode };
