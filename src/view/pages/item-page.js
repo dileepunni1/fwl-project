@@ -5,9 +5,14 @@ import ItemCounter from '../web_components/counter';
 import ItemsFilter, { FILTER_ITEM } from '../web_components/filter';
 import ItemButton, { ADD_ITEM } from '../web_components/button';
 
+import Store from '../../store/store';
+import Reducer from '../../store/reducer';
+
 const state = {
   items: FakeData.getItems(),
 };
+
+const store = Store(Reducer, state);
 
 const template = `
   <header-box data-title="Item Page"></header-box>
@@ -33,18 +38,28 @@ export default class ItemPage extends HTMLElement {
     const elem = document.createElement('div');
     elem.append(tmpl.content.cloneNode(true));
     this.appendChild(elem);
-    this.render({ ...state });
+    this.render(store.getState());
+    store.subscribe(() => {
+      this.render(store.getState());
+    });
 
     this.querySelector('item-filter').addEventListener(FILTER_ITEM, (e) => {
-      const filteredItems = state.items.filter((item) => {
-        return item.toLowerCase().indexOf(e.detail.filter.toLowerCase()) >= 0;
+      store.dispatch({
+        type: 'FILTER',
+        payload: {
+          filter: e.detail.filter,
+          initialState: state, // Utile solo per la demo
+        },
       });
-      this.render({ items: filteredItems });
     });
 
     this.querySelector('item-button').addEventListener(ADD_ITEM, () => {
-      state.items.push(FakeData.getItem());
-      this.render({ ...state });
+      store.dispatch({
+        type: 'ADD',
+        payload: {
+          item: FakeData.getItem(),
+        },
+      });
     });
   }
 
