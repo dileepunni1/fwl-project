@@ -2,7 +2,6 @@ import FakeData from './fake-data';
 
 import Items from './view/components/items';
 import Counter from './view/components/counter';
-import Registry from './view/registry';
 
 import * as VDom from './vdom/vdom';
 
@@ -12,19 +11,13 @@ const state = {
 
 let app = document.querySelector('#app');
 
-// Registry.add('item-list', Items.createItemList);
-// Registry.add('item-counter', Counter);
-
 VDom.Registry.add('item-list', Items.getVNode);
 VDom.Registry.add('item-counter', Counter.getVNode);
 
 const render = newState => {
   window.requestAnimationFrame(() => {
-    const cloneApp = Registry.renderRoot(app, newState);
+    const cloneApp = VDom.render(VDom.Mapper.mapRootNode(app, newState));
     app = VDom.mount(cloneApp, app);
-
-    console.log(VDom.Mapper.mapRootNode(app, state));
-    console.log(VDom.render(VDom.Mapper.mapRootNode(app, state)));
   });
 };
 
