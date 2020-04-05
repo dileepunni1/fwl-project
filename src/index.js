@@ -11,8 +11,8 @@ const state = {
 
 let app = document.querySelector('#app');
 
-VDom.Registry.add('item-list', Items.getVNode);
-VDom.Registry.add('item-counter', Counter.getVNode);
+VDom.Registry.add('item-list', Items);
+VDom.Registry.add('item-counter', Counter);
 
 const render = newState => {
   window.requestAnimationFrame(() => {
