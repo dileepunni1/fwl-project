@@ -6,12 +6,13 @@ const getAttributes = attributes => {
   }, {});
 };
 
-const create = ({ tagName, attrs = {}, isSVG = false, children = [] }) => {
+const create = ({ tagName, attrs = {}, isSVG = false, children = [], events = [] }) => {
   return Helpers.cleanObject({
     tagName,
     attrs: Helpers.cleanObject(attrs),
     isSVG: isSVG || tagName === 'svg',
     children: [...children],
+    events: [...events],
   });
 };
 
