@@ -5,6 +5,8 @@ import Counter from './view/components/counter';
 import Button from './view/components/button';
 import Filter from './view/components/filter';
 
+import Header from './view/web_components/header';
+
 import * as VDom from './vdom/vdom';
 
 const state = {
@@ -42,3 +44,7 @@ VDom.Events.add('filter', (evt) => {
 });
 
 render({ ...state });
+
+window
+  .customElements
+  .define('item-header', Header);
