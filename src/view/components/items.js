@@ -1,4 +1,4 @@
-import component from './component';
+import component from '../component';
 
 const getHTML = (items) => items.reduce((str, item) => {
   return `
