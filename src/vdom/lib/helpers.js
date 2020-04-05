@@ -7,4 +7,11 @@ const cloneDeepObject = obj => {
   return JSON.parse(JSON.stringify(obj));
 };
 
-export default { cleanObject, cloneDeepObject };
+const stringToHTML = str => {
+  // TODO: use a faster solution!
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(str, 'text/html');
+  return doc.body;
+};
+
+export default { cleanObject, cloneDeepObject, stringToHTML };
