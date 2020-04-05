@@ -36,7 +36,6 @@ export default class HeaderApp extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log('connect');
     window.requestAnimationFrame(() => {
       this.div = document.createElement('div');
       this.div.innerHTML = `<h1>${this.title}</h1>`;
