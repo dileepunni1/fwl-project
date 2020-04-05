@@ -1,7 +1,8 @@
 import FakeData from './fake-data';
 
 import Items from './view/components/items';
-import Counter from './view/components/counter';
+import Counter, { testCallback } from './view/components/counter';
+import Test from './view/components/test';
 import Registry from './view/registry';
 
 import * as VDom from './vdom/vdom';
@@ -15,12 +16,16 @@ let app = document.querySelector('#app');
 Registry.add('item-list', Items.createItemList);
 Registry.add('item-counter', Counter);
 
+VDom.Registry.add('item-counter', testCallback);
+VDom.Registry.add('item-test', Test);
+
 const render = newState => {
   window.requestAnimationFrame(() => {
     const cloneApp = Registry.renderRoot(app, newState);
     app = VDom.mount(cloneApp, app);
 
-    console.log(VDom.render(VDom.Mapper.mapRootNode(app)));
+    console.log(VDom.Mapper.mapRootNode(app));
+    console.log(VDom.render(VDom.Mapper.mapRootNode(app, state)));
   });
 };
 
