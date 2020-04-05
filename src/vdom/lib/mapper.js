@@ -8,7 +8,7 @@ const updateRegistredComponents = (vNode, state) => {
     if (isComponent) {
       const componentGenerator = Registry.get(newVNode.attrs['data-component']);
       if (componentGenerator) {
-        newVNode = componentGenerator(newVNode);
+        newVNode = componentGenerator(newVNode, state);
       }
     }
 
