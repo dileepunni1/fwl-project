@@ -6,6 +6,15 @@ const getAttributes = attributes => {
   }, {});
 };
 
+const create = ({ tagName, attrs, isSVG, children }) => {
+  return Helpers.cleanObject({
+    tagName,
+    attrs: Helpers.cleanObject(attrs),
+    isSVG: isSVG || tagName === 'svg',
+    children,
+  });
+};
+
 const createByNode = ($node, isSVG) => {
   if ($node.nodeType === 3) {
     return $node.textContent;
@@ -14,7 +23,7 @@ const createByNode = ($node, isSVG) => {
   const tagName = $node.nodeType === 8 ? 'comment' : $node.tagName.toLowerCase();
   const attrs = $node.nodeType !== 1 ? [] : Helpers.cleanObject(getAttributes($node.attributes));
 
-  return Helpers.cleanObject({
+  return create({
     tagName,
     attrs,
     isSVG: isSVG || tagName === 'svg',
@@ -22,4 +31,4 @@ const createByNode = ($node, isSVG) => {
   });
 };
 
-export default { createByNode };
+export default { createByNode, create };
