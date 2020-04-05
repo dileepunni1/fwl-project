@@ -1,4 +1,6 @@
-export default class ItemList extends HTMLElement {
+import VWCComponent from '../../vdom/lib/v-wc-element';
+
+export default class ItemList extends VWCComponent {
   static get observedAttributes() {
     return [
       'items',
@@ -26,12 +28,9 @@ export default class ItemList extends HTMLElement {
 
   attributeChangedCallback() {
     const items = this.items.reduce((str, item) => {
-      return `
-        ${str}
-        <li class="list-group-item">
-          ${item}
-        </li>`;
+      return `${str}<li class="list-group-item">${item}</li>`;
     }, '');
-    this.querySelector('ul').innerHTML = items;
+
+    this.changeDetection('ul', items);
   }
 }

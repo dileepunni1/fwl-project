@@ -1,4 +1,6 @@
-export default class ItemCounter extends HTMLElement {
+import VWCComponent from '../../vdom/lib/v-wc-element';
+
+export default class ItemCounter extends VWCComponent {
   static get observedAttributes() {
     return [
       'items',
@@ -25,6 +27,6 @@ export default class ItemCounter extends HTMLElement {
   }
 
   attributeChangedCallback() {
-    this.p.innerHTML = `${this.items.length} Items`;
+    this.changeDetection('p', `${this.items.length} Items`);
   }
 }
