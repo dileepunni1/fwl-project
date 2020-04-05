@@ -5,21 +5,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#"><%= htmlWebpackPlugin.options.title %></a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto"></ul>
+      </div>
+    </nav>
     <div class="container mt-3">
-      <h1></h1>
-      <item-header data-title="<%= htmlWebpackPlugin.options.title %>"></item-header>
       <div id="app">
-        <item-filter></item-filter>
-        <hr>
-        <!-- commento di test -->
-        <item-counter></item-counter>
-        <hr>
-        <item-list>
-          <p class="alert alert-light">Testo Introduttivo</p>
-          <hr/>
-        </item-list>
-        <hr>
-        <item-button></item-button>
+        <item-page></item-page>
       </div>
     </div>
   </body>
