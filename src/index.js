@@ -18,10 +18,14 @@ VDom.Registry.add('item-counter', Counter);
 VDom.Registry.add('item-add', Button);
 VDom.Registry.add('item-filter', Filter);
 
+let vDom = {};
+
 const render = newState => {
   window.requestAnimationFrame(() => {
-    const cloneApp = VDom.render(VDom.Mapper.mapRootNode(app, newState));
-    app = VDom.mount(cloneApp, app);
+    const cloneVDom = VDom.Mapper.mapRootNode(app, newState);
+    const patch = VDom.diff(vDom, cloneVDom);
+    app = patch(app);
+    vDom = cloneVDom;
   });
 };
 
